@@ -1,6 +1,9 @@
-import React from 'react';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import AboutUs from "./pages/AboutUs"; // adjust path if your AboutUs.jsx is in /pages
+// You can also move your Tailwind test into a component for clarity
 
-function App() {
+function Home() {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-lg text-center">
@@ -16,6 +19,22 @@ function App() {
         </button>
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <nav className="p-4 bg-gray-900 text-white flex gap-6">
+        <Link to="/" className="hover:text-blue-400">Home</Link>
+        <Link to="/about" className="hover:text-blue-400">About Us</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutUs />} />
+      </Routes>
+    </Router>
   );
 }
 
