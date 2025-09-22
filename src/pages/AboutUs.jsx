@@ -167,8 +167,8 @@ export default function AboutUs() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { name: "Mohamed Nihmathullah", role: "Full‑Stack Developer" },
-              { name: "Kalangiam", role: "Engineering Lead" },
-              { name: "Data Lead (Placeholder)", role: "Data & ML" },
+              { name: "Kanimozhi", role: "UIUX Designer" },
+              { name: "Kalangiam", role: "Data & ML" },
               { name: "Designer (Placeholder)", role: "Product & UX" },
             ].map((p, i) => (
               <motion.div
