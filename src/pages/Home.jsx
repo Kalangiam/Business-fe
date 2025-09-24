@@ -2,8 +2,35 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaLightbulb, FaCode, FaChartLine, FaCloud } from "react-icons/fa";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 export default function Home() {
+  // Sample data (replace with real stats later)
+  const pieData = [
+    { name: "Projects Completed", value: 65 },
+    { name: "Ongoing Projects", value: 20 },
+    { name: "Upcoming Projects", value: 15 },
+  ];
+
+  const COLORS = ["#6366F1", "#22D3EE", "#FBBF24"];
+
+  const barData = [
+    { year: "2021", projects: 12 },
+    { year: "2022", projects: 22 },
+    { year: "2023", projects: 35 },
+    { year: "2024", projects: 48 },
+  ];
+
   return (
     <div className="min-h-screen py-16 px-6 lg:px-24 bg-gradient-to-br from-gray-900 via-neutral-900 to-black text-slate-100">
       <div className="max-w-7xl mx-auto">
@@ -76,6 +103,57 @@ export default function Home() {
           ))}
         </section>
 
+        {/* Analytics Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }} 
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-20"
+        >
+          <h2 className="text-3xl font-bold mb-10 text-center">
+            Our Impact in Numbers
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Pie Chart */}
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 shadow-lg flex flex-col items-center">
+              <h3 className="text-xl font-semibold mb-6">Project Distribution</h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    outerRadius={120}
+                    dataKey="value"
+                    label={({ name, percent }) =>
+                      `${name} ${(percent * 100).toFixed(0)}%`
+                    }
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Bar Chart */}
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 shadow-lg flex flex-col items-center">
+              <h3 className="text-xl font-semibold mb-6">Projects Growth</h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={barData}>
+                  <XAxis dataKey="year" stroke="#9CA3AF" />
+                  <YAxis stroke="#9CA3AF" />
+                  <Tooltip />
+                  <Bar dataKey="projects" fill="#6366F1" radius={[6, 6, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </motion.section>
+
         {/* Call to Action Banner */}
         <motion.section
           initial={{ opacity: 0, scale: 0.9 }}
@@ -97,6 +175,7 @@ export default function Home() {
             Let’s Build Together
           </a>
         </motion.section>
+        
       </div>
     </div>
   );
